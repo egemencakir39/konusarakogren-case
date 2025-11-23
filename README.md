@@ -89,6 +89,63 @@ Bu özellik kullanıcı alışkanlığı ve kullanım yoğunluğu ölçmek için
 Geçmiş ekranında her bir sonucu sola kaydırarak silme eklenebilir.
 
 ---
+### 🚀 Kurulum ve Çalıştırma Rehberi
+
+Bu projeyi lokal ortamda çalıştırmak için aşağıdaki adımları takip edin.
+
+1️⃣ Depoyu Klonlayın
+git clone https://github.com/kullaniciadi/proje-adi.git
+cd proje-adi
+
+2️⃣ Gerekli Paketleri Yükleyin
+npm install
+
+
+veya
+
+yarn install
+
+3️⃣ Hugging Face API Anahtarını Oluşturun
+
+Hugging Face hesabınıza giriş yapın
+
+Sağ üst → Settings → Access Tokens
+
+New Token oluşturun
+
+Name: “diary-app”
+
+Token Type: Fine Grained
+
+Token’ı kopyalayın
+
+⚠️ Önemli: Token’ı GitHub’a kesinlikle göndermeyin. Public repo’ya yüklenirse HuggingFace otomatik olarak invalid durumuna düşürür.
+
+4️⃣ .env Dosyası Oluşturun
+
+Proje kök dizinine .env oluşturun:
+
+HF_TOKEN=hf_xxx_buraya_sizin_tokeniniz
+
+
+⚠️ .env dosyası güvenlik nedeniyle repoya dahil değildir.
+
+5️⃣ Uygulamayı Başlatın
+npx expo start
+
+
+Telefon ile QR kodu okutarak çalıştırabilirsiniz �
+
+🧪 Test Amaçlı Model
+
+Projede şu model kullanılmaktadır:
+
+savasy/bert-base-turkish-sentiment-cased
+
+
+Her istek için .env içindeki token zorunludur.
+Token girilmezse analiz çalışmaz.
+---
 
 ## 📦 Proje Yapısı
 
