@@ -103,16 +103,3 @@ src/
 └─ screens/
 ├─ HomeScreen.js
 └─ HistoryScreen.js
-
----
-
-### 🔐 Neden .env Kullanmadım?
-
-Bu proje bir case çalışması olduğu için değerlendiricilerin uygulamayı hızlıca indirip çalıştırabilmesi önceliklidir.
-Bu nedenle API anahtarını .env dosyasıyla saklamak yerine doğrudan proje içine ekledim. Böylece:
-
-Ek bir .env dosyası oluşturmalarına gerek kalmaz,
-
-Kurulum süreci daha hızlı ve sorunsuz olur,
-
-Gerçek bir proje ortamında elbette tüm API ve Key değişkenleri .env dosyasında saklanmalı ve gizli tutulmalıdır.
