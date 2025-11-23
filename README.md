@@ -1,0 +1,118 @@
+# Konuşarak Öğren – AI Günlük Analiz Uygulaması
+
+Bu proje kullanıcının yazdığı bir cümlenin duygu durumunu (pozitif / negatif / nötr) analiz eden, kısa bir özet + öneri sunan ve tüm analiz geçmişini saklayan bir React Native uygulamasıdır.
+
+---
+
+##  Uygulama Önizlemesi
+
+https://youtube.com/shorts/tKKLKgh-xko
+
+---
+
+##  Özellikler
+
+- **Türkçe Duygu Analizi**  
+  Kullanıcının yazdığı metin Hugging Face Türkçe modeli ile analiz edilir.
+
+- **Özet + Öneri Üretimi**  
+  Analiz sonucuna göre kullanıcıya kısa bir açıklama ve motivasyon önerisi sunulur.
+
+- **Geçmiş Kayıt Sistemi**  
+  Yapılan analizler geçmiş ekranında listelenir.
+
+- **Kalıcı Depolama (AsyncStorage)**  
+  Uygulama yeniden açıldığında geçmiş silinmez.
+
+- **Tab Navigation**  
+  Home ↔ History arasında alt menü ile geçiş.
+
+---
+
+## 🧠 Kullanılan Teknolojiler
+
+### ⚛️ React Native  
+Uygulamanın mobil arayüzü için kullanıldı.
+
+### 🧵 Redux Toolkit  
+Uygulama durum yönetimi için kullanıldı.  
+**Neden?**  
+- API isteğinin loading / success / error aşamalarını yönetmek çok kolay.  
+- State’i hem Home hem History ekranında paylaşmak gerekiyor.  
+- Redux Toolkit’i tercih etmemizin nedeni, uygulamaya yeni özellikler eklendiğinde durum yönetimini daha düzenli, ölçeklenebilir ve sürdürülebilir hale getirmesidir.
+
+### 📡 Axios  
+Hugging Face API’sine istek göndermek için kullanıldı.
+
+### 🤖 Hugging Face Router API  
+Türkçe duygu analizi modeli:  
+`savasy/bert-base-turkish-sentiment-cased`  
+**Neden?**  
+- Bu model tamamen Türkçe için eğitildi.  
+- İngilizce modeller Türkçe cümlelerde yanlış sonuç veriyordu.
+
+### 💾 AsyncStorage  
+Geçmişin kalıcı olması için kullanıldı.  
+**Neden?**  
+- Redux RAM’de çalıştığı için uygulama kapanınca veri kayboluyor.  
+- AsyncStorage ile analiz geçmişi sürekli saklanıyor.
+
+### 🗺 React Navigation Bottom Tabs  
+Home ve History sayfaları arasında geçiş için kullanıldı.
+
+---
+
+## 🔮 Geliştirilebilir Özellikler
+
+Bu proje temel duygu analizi ve öneri sistemi üzerine kurulmuştur. İleride eklenebilecek bazı geliştirmeler:
+
+### ⭐ 1. AI Tabanlı Kişisel Motivasyon Mesajları  
+Kullanıcının yazdığı metne göre daha kapsamlı ve kişisel motivasyon cümleleri üretilebilir.  
+Mevcut sürümde yalnızca “pozitif / negatif / nötr” durumuna göre sabit öneriler dönülmektedir.  
+**Neden eklemedik?**  
+- Hugging Face Router API üzerinden metin üretimi yapan modeller yüksek token maliyetine sahip.Ücretsiz olan modellerden tam verim alınamadı.  
+- Bu case çalışma için hızlı ve optimize bir çözüm hedeflendi.
+
+---
+
+### ⭐ 2. Günlük Yazma Limiti  
+Kullanıcının günde belirli bir sayıda analiz yapmasına izin veren bir sistem eklenebilir.  
+Örneğin:  
+- Ücretsiz kullanıcı → günde 5 analiz  
+- Premium kullanıcı → limitsiz  
+
+Bu özellik kullanıcı alışkanlığı ve kullanım yoğunluğu ölçmek için değerlidir.
+
+---
+
+### ⭐ 3. Tek Entry Silme
+Geçmiş ekranında her bir sonucu sola kaydırarak silme eklenebilir.
+
+---
+
+## 📦 Proje Yapısı
+
+src/
+├─ components/
+│ └─ ResultCard.js
+├─ navigation/
+│ └─ Tabs.js
+├─ redux/
+│ ├─ diarySlice.js
+│ └─ store.js
+└─ screens/
+├─ HomeScreen.js
+└─ HistoryScreen.js
+
+---
+
+### 🔐 Neden .env Kullanmadım?
+
+Bu proje bir case çalışması olduğu için değerlendiricilerin uygulamayı hızlıca indirip çalıştırabilmesi önceliklidir.
+Bu nedenle API anahtarını .env dosyasıyla saklamak yerine doğrudan proje içine ekledim. Böylece:
+
+Ek bir .env dosyası oluşturmalarına gerek kalmaz,
+
+Kurulum süreci daha hızlı ve sorunsuz olur,
+
+Gerçek bir proje ortamında elbette tüm API ve Key değişkenleri .env dosyasında saklanmalı ve gizli tutulmalıdır.
